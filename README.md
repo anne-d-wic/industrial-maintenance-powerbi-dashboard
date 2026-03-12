@@ -2,7 +2,9 @@
 ## Project Overview
 
 This project demonstrates how data analytics can support industrial maintenance operations.
+
 The dashboard was designed to monitor machine downtime, maintenance costs and technician workload, and to help identify operational inefficiencies.
+
 It provides a structured decision-support view for operations and maintenance managers.
 
 ---

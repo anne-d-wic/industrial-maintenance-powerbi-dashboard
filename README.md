@@ -20,8 +20,6 @@ The dashboard is designed to answer three operational questions:
 
 The reporting flow is structured to support both high-level decision-making and day-to-day performance analysis.
 
-![Executive Overview](images/maintenance_dashboard_overview.png)
-
 ## End-To-End Pipeline
 
 ### 1. Python - Source Data Generation
@@ -70,24 +68,24 @@ The final Power BI model is built around shared dimensions so that filtering rem
 
 ### Shared Dimensions
 
-- Plant
-- Machine
-- Technician
-- Priority
-- Date
-- Month
+- DimPlant
+- DimMachine
+- DimTechnician
+- DimPriority
+- DimDate
+- DimMonth
 
 ### Core Analytical View
 
-`vw_maintenance_requests_enriched` is the central detailed view. It joins machines and maintenance requests, derives operational metrics, and creates the request-level fields used throughout the report.
+`maintenance_requests_enriched` is the central detailed view. It joins machines and maintenance requests, derives operational metrics, and creates the request-level fields used throughout the report.
 
 ### Reporting Views By Dashboard Page
 
-- `vw_executive_overview` supports executive monitoring by plant and month.
-- `vw_machine_performance` supports machine-level ranking and asset comparison.
-- `vw_operational_performance` supports technician and monthly operational analysis.
-- `vw_priority_resolution` supports priority-level service pattern analysis.
-- `vw_plant_monthly_trend` supports plant-level monthly trend analysis.
+- `executive_overview` supports executive monitoring by plant and month.
+- `machine_performance` supports machine-level ranking and asset comparison.
+- `operational_performance` supports technician and monthly operational analysis.
+- `priority_resolution` supports priority-level service pattern analysis.
+- `plant_monthly_trend` supports plant-level monthly trend analysis.
 
 ## Why The SQL Layer Matters
 
@@ -107,11 +105,11 @@ The SQL-backed model was validated through a parallel comparison with the origin
 
 ## How To Reproduce
 
-1. Run the Python data-generation step to create the source CSV files.
-2. Load `machines.csv` and `maintenance_requests.csv` into SQL Server staging tables.
-3. Run the SQL scripts in order from `01_create_staging_tables.sql` to `05_validation_queries.sql`.
-4. Open the SQL-backed Power BI file.
-5. Refresh the model and validate the visuals.
+1. Run the Python data-generation step to create the source CSV files
+2. Load `machines.csv` and `maintenance_requests.csv` into SQL Server staging tables
+3. Run the SQL scripts in order from `01_create_staging_tables.sql` to `05_validation_queries.sql`
+4. Open the SQL-backed Power BI file
+5. Refresh the model and validate the visuals
 
 ## Repository Structure
 
@@ -122,11 +120,13 @@ SQL/
   03_create_core_views.sql
   04_create_reporting_views.sql
   05_validation_queries.sql
-industrial-operations-dashboard-sql.pbix
-generate_industrial_dataset.py
-analysis.py
-machines.csv
-maintenance_requests.csv
+dashboard/
+  industrial-operations-dashboard-sql.pbix
+data/
+  generate_industrial_dataset.py
+  analysis.py
+  machines.csv
+  maintenance_requests.csv
 images/
   data_model.png
   maintenance_dashboard_overview.png
@@ -157,29 +157,27 @@ This project demonstrates how industrial operational data can be generated, tran
 
 The final deliverable combines Python-based source generation, SQL-based transformation and reporting logic, and Power BI-based semantic modeling into a dashboard built for both executive and operational analysis.
 
-<details>
-<summary>SQL Scripts Breakdown</summary>
+## SQL Scripts Breakdown
 
-`01_create_staging_tables.sql` creates the database and staging tables used to receive the source data.
+<details><summary>See more</summary>
 
-`02_load_source_tables.sql` supports the data load step from the generated CSV files into SQL Server.
-
-`03_create_core_views.sql` builds the enriched request-level analytical view used as the foundation of the reporting layer.
-
-`04_create_reporting_views.sql` creates the page-oriented reporting views consumed by Power BI.
-
-`05_validation_queries.sql` contains validation checks used to reconcile row counts, totals, and view outputs before replacing the legacy model.
+`01_create_staging_tables.sql` creates the database and staging tables used to receive the source data
+`02_load_source_tables.sql` supports the data load step from the generated CSV files into SQL Server
+`03_create_core_views.sql` builds the enriched request-level analytical view used as the foundation of the reporting layer
+`04_create_reporting_views.sql` creates the page-oriented reporting views consumed by Power BI
+`05_validation_queries.sql` contains validation checks used to reconcile row counts, totals, and view outputs before replacing the legacy model
 
 </details>
 
-<details>
-<summary>Extended SQL View Details</summary>
+## Extended SQL View Details
 
-- `vw_maintenance_requests_enriched` joins source entities, derives operational metrics, and prepares request-level business logic.
-- `vw_executive_overview` aggregates maintenance activity by plant and month for high-level monitoring.
-- `vw_machine_performance` aggregates machine-level performance metrics for ranking and comparison.
-- `vw_operational_performance` supports technician and monthly execution analysis.
-- `vw_priority_resolution` isolates priority-level service patterns.
-- `vw_plant_monthly_trend` supports plant-level monthly trend analysis.
+<details><summary>See more</summary>
+
+- `maintenance_requests_enriched` joins source entities, derives operational metrics, and prepares request-level business logic
+- `executive_overview` aggregates maintenance activity by plant and month for high-level monitoring
+- `machine_performance` aggregates machine-level performance metrics for ranking and comparison
+- `operational_performance` supports technician and monthly execution analysis
+- `priority_resolution` isolates priority-level service patterns
+- `plant_monthly_trend` supports plant-level monthly trend analysis
 
 </details>

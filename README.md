@@ -211,11 +211,7 @@ Recommended filters:
 - Plant
 - Priority
 
-Suggested screenshot reference:
-
-```markdown
 ![Executive Overview](images/maintenance_dashboard_overview.png)
-```
 
 ### Machine Performance Analysis
 This page is designed for asset-level diagnosis.
@@ -233,11 +229,7 @@ Recommended filters:
 - Plant
 - Machine Type
 
-Suggested screenshot reference:
-
-```markdown
 ![Machine Performance Analysis](images/machine_performance_analysis.png)
-```
 
 ### Operational Performance
 This page is designed for execution analysis at technician and priority level.
@@ -256,11 +248,7 @@ Recommended filters:
 - Priority
 - Technician
 
-Suggested screenshot reference:
-
-```markdown
 ![Operational Performance](images/operational_performance.png)
-```
 
 ## Why The SQL Layer Matters
 The most important upgrade in this project is the introduction of a real SQL transformation layer.

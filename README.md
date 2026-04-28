@@ -118,14 +118,15 @@ The model was cleaned so that the final report no longer depends on the original
 
 ## Data Model Design
 The final Power BI model is built around a shared-dimension approach.
+![data_model](images/data_model.png)
 
 ### Shared Dimensions
-- `Plant`
-- `Machine`
-- `Technician`
-- `Priority`
-- `Date`
-- `Month`
+- `DimPlant`
+- `DimMachine`
+- `DimTechnician`
+- `DimPriority`
+- `DimDate`
+- `DimMonth`
 
 These dimensions drive consistent filtering across report pages and avoid mixing visual logic directly between reporting views.
 

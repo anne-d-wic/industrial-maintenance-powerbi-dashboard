@@ -38,25 +38,25 @@ Power BI consumes the SQL views through shared dimensions and KPI measures to de
 
 ### Executive Overview
 
-This page is designed for high-level operational monitoring across maintenance volume, downtime, cost, and preventive maintenance behavior.
+This page supports high-level monitoring of maintenance activity, operational disruption, and cost exposure across the industrial environment.
 
-Key analyses include total maintenance requests, total downtime hours, total maintenance cost, preventive maintenance ratio, and monthly maintenance trend.
+It helps decision-makers quickly assess whether maintenance volume, downtime, and cost are evolving in a stable way, and whether the balance between preventive and reactive work remains under control.
 
 ![Executive Overview](images/maintenance_dashboard_overview.png)
 
 ### Machine Performance Analysis
 
-This page is designed for asset-level diagnosis and machine comparison.
+This page supports asset-level diagnosis by highlighting which machines generate the greatest operational and financial impact.
 
-Key analyses include top machines by downtime, top machines by maintenance cost, highest machine downtime, and downtime-versus-cost behavior.
+It helps identify which assets require closer monitoring, preventive action, or maintenance prioritization based on downtime concentration, cost burden, and comparative machine behavior.
 
 ![Machine Performance Analysis](images/machine_performance_analysis.png)
 
 ### Operational Performance
 
-This page is designed for technician- and priority-level execution analysis.
+This page supports execution-level analysis of how maintenance work is handled across technicians, priorities, and operational periods.
 
-Key analyses include corrective maintenance requests, average cost per maintenance request, requests by priority, average resolution time by priority, and monthly operational trend.
+It helps evaluate service responsiveness, identify workload patterns, and understand whether urgent work is being resolved efficiently across the maintenance process.
 
 ![Operational Performance](images/operational_performance.png)
 

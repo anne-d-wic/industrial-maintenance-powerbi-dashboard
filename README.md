@@ -161,11 +161,11 @@ The final deliverable combines Python-based source generation, SQL-based transfo
 
 <details><summary>See more</summary>
 
-`01_create_staging_tables.sql` creates the database and staging tables used to receive the source data
-`02_load_source_tables.sql` supports the data load step from the generated CSV files into SQL Server
-`03_create_core_views.sql` builds the enriched request-level analytical view used as the foundation of the reporting layer
-`04_create_reporting_views.sql` creates the page-oriented reporting views consumed by Power BI
-`05_validation_queries.sql` contains validation checks used to reconcile row counts, totals, and view outputs before replacing the legacy model
+- `01_create_staging_tables.sql` creates the database and staging tables used to receive the source data
+- `02_load_source_tables.sql` supports the data load step from the generated CSV files into SQL Server
+- `03_create_core_views.sql` builds the enriched request-level analytical view used as the foundation of the reporting layer
+- `04_create_reporting_views.sql` creates the page-oriented reporting views consumed by Power BI
+- `05_validation_queries.sql` contains validation checks used to reconcile row counts, totals, and view outputs before replacing the legacy model
 
 </details>
 

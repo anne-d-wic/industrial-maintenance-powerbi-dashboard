@@ -1,21 +1,19 @@
 # Industrial Maintenance Analytics Dashboard
 
 ## Project Overview
-
 This project simulates an industrial maintenance environment and turns raw operational data into a structured analytics workflow built across Python, SQL Server, and Power BI.
 
 The dashboard is designed for maintenance and operations stakeholders who need to monitor downtime, maintenance cost, request volume, machine performance, and technician-level execution patterns.
 
 The final solution follows a clear analytics pipeline:
 
-1. Python generates realistic source data.
-2. SQL Server transforms and models the data into reporting-ready views.
-3. Power BI consumes the SQL views through a cleaned semantic model and delivers interactive business reporting.
+1. Python generates realistic source data
+2. SQL Server transforms and models the data into reporting-ready views
+3. Power BI consumes the SQL views through a cleaned semantic model and delivers interactive business reporting
 
 This project was intentionally upgraded from a flat-file dashboard into a more credible end-to-end BI workflow so that the analytical logic is distributed in a realistic way across the stack rather than concentrated only inside Power BI.
 
 ## Business Objective
-
 The dashboard answers three operational questions:
 
 1. How much maintenance activity, downtime, and cost is the organization absorbing over time?
@@ -27,9 +25,7 @@ The reporting layer is organized to support both executive monitoring and operat
 ## End-To-End Pipeline
 
 ### 1. Python - Source Data Generation
-
 Python is used to simulate source data for an industrial maintenance environment.
-
 The generated datasets include:
 
 - `machines.csv`
@@ -38,9 +34,7 @@ The generated datasets include:
 Python is responsible for the source layer only. It produces the raw entities that feed the rest of the stack.
 
 ### 2. SQL Server - Transformation And Reporting Layer
-
 SQL Server is used as the core transformation layer.
-
 This layer handles:
 
 - relational joins between machines and maintenance requests
@@ -61,13 +55,10 @@ sql/
 ```
 
 ### SQL Scripts Breakdown
-
 Each SQL script has a specific role in the reporting pipeline.
 
 #### `01_create_staging_tables.sql`
-
 Creates the database objects used to receive the source data.
-
 Main responsibilities:
 
 - create the target database
@@ -75,9 +66,7 @@ Main responsibilities:
 - define the basic relational structure between machines and maintenance requests
 
 #### `02_load_source_tables.sql`
-
 Documents and supports the data load step from CSV into SQL Server.
-
 Main responsibilities:
 
 - load `machines.csv` into the machine staging table
@@ -85,9 +74,7 @@ Main responsibilities:
 - provide the import logic needed to move the raw source files into SQL
 
 #### `03_create_core_views.sql`
-
 Creates the main enriched analytical base view.
-
 Main responsibilities:
 
 - join source entities
@@ -97,9 +84,7 @@ Main responsibilities:
 This is the key bridge between raw operational data and reporting-ready SQL outputs.
 
 #### `04_create_reporting_views.sql`
-
 Creates the SQL views that map directly to the Power BI pages.
-
 Main responsibilities:
 
 - build executive-level aggregates
@@ -110,9 +95,7 @@ Main responsibilities:
 This script is what turns the enriched view into page-ready reporting datasets.
 
 #### `05_validation_queries.sql`
-
 Provides validation checks to confirm that the SQL layer is behaving as expected.
-
 Main responsibilities:
 
 - reconcile row counts between source and transformed layers
@@ -123,9 +106,7 @@ Main responsibilities:
 This validation step is important because it shows that the SQL layer was not only built, but also tested before replacing the legacy model.
 
 ### 3. Power BI - Semantic Model And Dashboarding
-
 Power BI consumes the SQL views rather than rebuilding the full transformation logic from CSV files.
-
 Power BI is used for:
 
 - shared dimensions and filter design
@@ -136,11 +117,9 @@ Power BI is used for:
 The model was cleaned so that the final report no longer depends on the original legacy tables.
 
 ## Data Model Design
-
 The final Power BI model is built around a shared-dimension approach.
 
 ### Shared Dimensions
-
 - `Plant`
 - `Machine`
 - `Technician`
@@ -153,9 +132,7 @@ These dimensions drive consistent filtering across report pages and avoid mixing
 ### Core SQL Views
 
 #### `vw_maintenance_requests_enriched`
-
 This is the central detailed analytical view.
-
 It joins source entities and derives the fields used throughout the report, including:
 
 - machine attributes
@@ -168,9 +145,7 @@ It joins source entities and derives the fields used throughout the report, incl
 - machine age band
 
 #### `vw_executive_overview`
-
 This view supports high-level monitoring by plant and month.
-
 Main outputs:
 
 - maintenance request volume
@@ -180,9 +155,7 @@ Main outputs:
 - preventive maintenance ratio
 
 #### `vw_machine_performance`
-
 This view supports machine-level ranking and asset investigation.
-
 Main outputs:
 
 - request count by machine
@@ -193,9 +166,7 @@ Main outputs:
 - downtime and cost ranking
 
 #### `vw_operational_performance`
-
 This view supports technician and monthly execution analysis.
-
 Main outputs:
 
 - request count by technician, priority, and month
@@ -204,9 +175,7 @@ Main outputs:
 - average resolution time by technician, priority, and month
 
 #### `vw_priority_resolution`
-
 This view isolates priority-level service patterns.
-
 Main outputs:
 
 - request count by priority
@@ -214,9 +183,7 @@ Main outputs:
 - average start delay by priority
 
 #### `vw_plant_monthly_trend`
-
 This view supports monthly trend analysis by plant.
-
 Main outputs:
 
 - request count by plant and month
@@ -225,10 +192,8 @@ Main outputs:
 
 ## Dashboard Pages
 
-### 1. Executive Overview
-
+### Executive Overview
 This page is designed for high-level operational monitoring.
-
 It focuses on:
 
 - total maintenance requests
@@ -248,13 +213,11 @@ Recommended filters:
 Suggested screenshot reference:
 
 ```markdown
-![Executive Overview](maintenance_dashboard_overview.png)
+![Executive Overview](images/maintenance_dashboard_overview.png)
 ```
 
-### 2. Machine Performance Analysis
-
+### Machine Performance Analysis
 This page is designed for asset-level diagnosis.
-
 It focuses on:
 
 - top machines by downtime
@@ -272,13 +235,11 @@ Recommended filters:
 Suggested screenshot reference:
 
 ```markdown
-![Machine Performance Analysis](machine_performance_analysis.png)
+![Machine Performance Analysis](images/machine_performance_analysis.png)
 ```
 
-### 3. Operational Performance
-
+### Operational Performance
 This page is designed for execution analysis at technician and priority level.
-
 It focuses on:
 
 - corrective maintenance requests
@@ -297,13 +258,11 @@ Recommended filters:
 Suggested screenshot reference:
 
 ```markdown
-![Operational Performance](operational_performance.png)
+![Operational Performance](images/operational_performance.png)
 ```
 
 ## Why The SQL Layer Matters
-
 The most important upgrade in this project is the introduction of a real SQL transformation layer.
-
 Instead of keeping all logic inside Power BI or relying only on flat files, the project now demonstrates a more realistic BI architecture:
 
 - Python handles data generation
@@ -318,9 +277,7 @@ This matters because it shows:
 - a stronger analytics engineering mindset than a dashboard-only build
 
 ## Validation Approach
-
 The SQL migration was validated through a parallel-model comparison inside Power BI.
-
 Validation steps included:
 
 - comparing old and new visuals page by page
@@ -332,31 +289,28 @@ Validation steps included:
 This ensured that the final report was not only technically migrated, but also behaviorally consistent.
 
 ## Repository Structure
-
 ```text
-industrial-dashboard-project/
-  generate_industrial_dataset.py
-  analysis.py
-  machines.csv
-  maintenance_requests.csv
-  industrial-operations-dashboard.pbix
-  industrial-operations-dashboard-sql.pbix
-  machine_performance_analysis.png
-  maintenance_dashboard_overview.png
-  operational_performance.png
-  SQL_TRANSFORMATION_GUIDE.md
-  POWERBI_SQL_REMAP_GUIDE.docx
-  POWERBI_SHARED_DIMENSIONS_GUIDE.docx
-  sql/
+SQL/
     01_create_staging_tables.sql
     02_load_source_tables.sql
     03_create_core_views.sql
     04_create_reporting_views.sql
     05_validation_queries.sql
+dashboard/
+  industrial-operations-dashboard-sql.pbix
+data/
+  generate_industrial_dataset.py
+  analysis.py
+  machines.csv
+  maintenance_requests.csv
+images/
+  data_model.png
+  machine_performance_analysis.png
+  maintenance_dashboard_overview.png
+  operational_performance.png
 ```
 
 ## Tools Used
-
 - Python
 - pandas
 - SQL Server
@@ -364,7 +318,6 @@ industrial-dashboard-project/
 - Power BI
 
 ## Key Analytical Skills Demonstrated
-
 - synthetic dataset design in Python
 - SQL staging and transformation workflow
 - analytical view design for BI consumption
@@ -374,7 +327,6 @@ industrial-dashboard-project/
 - dashboard remapping from legacy tables to SQL-backed views
 
 ## Outcome
-
 This project evolved from a dashboard built on generated flat files into a more mature BI project with an explicit reporting pipeline.
 
 The final deliverable shows how operational data can move from simulated source generation to SQL modeling and then into a Power BI report structured for both executive and operational analysis.

@@ -171,8 +171,6 @@ images/
 
 ## Outcome
 
-## Outcome
-
 This project demonstrates how industrial maintenance data can be generated, transformed in SQL Server, and delivered through a Power BI reporting workflow for executive and operational analysis.
 
 ## SQL Scripts Breakdown

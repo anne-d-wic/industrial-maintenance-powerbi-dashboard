@@ -105,16 +105,29 @@ The SQL-backed model was validated through a parallel comparison with the origin
 
 ## How To Reproduce
 
-1. Run `data/generate_industrial_dataset.py` to generate the source CSV files: `machines.csv` and `maintenance_requests.csv`.
-2. Load both CSV files into SQL Server staging tables by using the scripts in the `SQL/` folder.
-3. Run the SQL scripts in this order:
+1. Run `data/generate_industrial_dataset.py` to generate the source files used by the project:
+   - `machines.csv`
+   - `maintenance_requests.csv`
+
+2. Open SQL Server and create/load the staging layer by running:
    - `SQL/01_create_staging_tables.sql`
    - `SQL/02_load_source_tables.sql`
+
+3. Build the analytical and reporting layer by running:
    - `SQL/03_create_core_views.sql`
    - `SQL/04_create_reporting_views.sql`
+
+4. Validate the SQL outputs by running:
    - `SQL/05_validation_queries.sql`
-4. Open `dashboard/industrial-operations-dashboard-sql.pbix` in Power BI Desktop.
-5. Refresh the model and validate the report visuals against the SQL reporting layer.
+
+5. Open `dashboard/industrial-operations-dashboard-sql.pbix` in Power BI Desktop.
+
+6. Refresh the model so Power BI reconnects to the SQL reporting views and loads the latest data.
+
+7. Review the three dashboard pages:
+   - Executive Overview
+   - Machine Performance Analysis
+   - Operational Performance
 
 ## Repository Structure
 
@@ -158,9 +171,9 @@ images/
 
 ## Outcome
 
-This project demonstrates how industrial operational data can be generated, transformed, and delivered through a structured BI workflow built across Python, SQL Server, and Power BI.
+## Outcome
 
-The final deliverable combines source data generation, SQL-based reporting views, and Power BI semantic modeling into a dashboard designed for both executive monitoring and operational analysis.
+This project demonstrates how industrial maintenance data can be generated, transformed in SQL Server, and delivered through a Power BI reporting workflow for executive and operational analysis.
 
 ## SQL Scripts Breakdown
 

@@ -105,11 +105,16 @@ The SQL-backed model was validated through a parallel comparison with the origin
 
 ## How To Reproduce
 
-1. Run the Python data-generation step to create the source CSV files
-2. Load `machines.csv` and `maintenance_requests.csv` into SQL Server staging tables
-3. Run the SQL scripts in order from `01_create_staging_tables.sql` to `05_validation_queries.sql`
-4. Open the SQL-backed Power BI file
-5. Refresh the model and validate the visuals
+1. Run `data/generate_industrial_dataset.py` to generate the source CSV files: `machines.csv` and `maintenance_requests.csv`.
+2. Load both CSV files into SQL Server staging tables by using the scripts in the `SQL/` folder.
+3. Run the SQL scripts in this order:
+   - `SQL/01_create_staging_tables.sql`
+   - `SQL/02_load_source_tables.sql`
+   - `SQL/03_create_core_views.sql`
+   - `SQL/04_create_reporting_views.sql`
+   - `SQL/05_validation_queries.sql`
+4. Open `dashboard/industrial-operations-dashboard-sql.pbix` in Power BI Desktop.
+5. Refresh the model and validate the report visuals against the SQL reporting layer.
 
 ## Repository Structure
 
@@ -153,9 +158,9 @@ images/
 
 ## Outcome
 
-This project demonstrates how industrial operational data can be generated, transformed, validated, and delivered through a structured BI workflow.
+This project demonstrates how industrial operational data can be generated, transformed, and delivered through a structured BI workflow built across Python, SQL Server, and Power BI.
 
-The final deliverable combines Python-based source generation, SQL-based transformation and reporting logic, and Power BI-based semantic modeling into a dashboard built for both executive and operational analysis.
+The final deliverable combines source data generation, SQL-based reporting views, and Power BI semantic modeling into a dashboard designed for both executive monitoring and operational analysis.
 
 ## SQL Scripts Breakdown
 
